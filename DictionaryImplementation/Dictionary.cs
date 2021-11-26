@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
 
@@ -30,6 +31,7 @@ namespace DictionaryImplementation
             _comparer = comparer ?? EqualityComparer<TKey>.Default;
 
         }
+
         private void Initialize(int capacity)
         {
             int size = HashHelpers.GetPrime(capacity);
@@ -43,7 +45,10 @@ namespace DictionaryImplementation
             get
             {
                 int i = FindEntry(key);
-                if (i >= 0) return _entries[i].value;
+                if (i >= 0)
+                {
+                    return _entries[i].value;
+                }
                 throw new Exception();
                 return default(TValue);
             }
@@ -52,6 +57,7 @@ namespace DictionaryImplementation
                 Insert(key, value, false);
             }
         }
+        
         private int FindEntry(TKey key)
         {
             if (key == null)
@@ -161,6 +167,7 @@ namespace DictionaryImplementation
         {
             Insert(key, value, true);
         }
+      
 
     }
 }
